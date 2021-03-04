@@ -134,3 +134,8 @@ idea/
 .idea/.gitignore
 .idea/shelf/
 .idea/workspace.xml
+
+# ---- Library ----
+# Bootstrap
+bootstrap/
+.bootstrap
