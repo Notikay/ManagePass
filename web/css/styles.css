@@ -10,8 +10,11 @@ body {
     color: #fff;
 }
 
+.main .container div {
+	padding: 5px;
+}
+
 .info textarea {
-    width: 50%;
     height: 100px;
     resize: none;
 }
