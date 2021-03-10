@@ -1,5 +1,7 @@
 <!--
     TODO: Добавить кнопки выхода в меню
+    TODO: Оформить шапку
+    TODO: Довести до ума форму
 -->
 
 <!DOCTYPE html>
@@ -22,24 +24,27 @@
     <main>
         <div class="main">
             <div class="container text-center">
-                <form action="">
+                <form>
                     <div class="name">
-                        <input type="text" class="form-control" placeholder="Название сайта" required="">
+                        <input type="text" id="name" class="form-control" placeholder="Название сайта" required>
                     </div>
                     <div class="url">
-                        <input type="url" class="form-control" placeholder="URL сайта" required="">
+                        <input type="url" id="url" class="form-control" placeholder="URL сайта" required>
                     </div>
                     <div class="login">
-                        <input type="text" class="form-control" placeholder="Логин/Почта/Номер" required="">
+                        <input type="text" id="login" class="form-control" placeholder="Логин/Почта/Номер" required>
                     </div>
                     <div class="password">
-                        <input type="password" class="form-control" placeholder="Пароль" required="">
+                        <input type="password" id="password" class="form-control" placeholder="Пароль" required>
                     </div>
                     <div class="info">
-                        <textarea class="form-control" placeholder="Доп. информация"></textarea>
+                        <textarea id="info" class="form-control" placeholder="Доп. информация"></textarea>
                     </div>
-                    <div class="save-btn">
-                        <button type="button" class="btn btn-success">Сохранить данные!</button>
+                    <div class="save">
+                        <button type="button" id="save" class="btn btn-success" onclick="godata()">Сохранить данные!</button>
+                    </div>
+                    <div id="warning">
+                        Заполните все обязательные поля!
                     </div>
                 </form>
             </div>
