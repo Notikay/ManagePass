@@ -1,8 +1,9 @@
 /*
-    TODO: Переименовать и оптимизировать функцию
+    TODO: Оптимизировать функцию
+    TODO: Отправлять данные кортежом
 */
 
-function godata() {
+function sendData() {
 	var name = document.getElementById('name').value;
 	var url = document.getElementById('url').value;
 	var login = document.getElementById('login').value;
@@ -13,6 +14,6 @@ function godata() {
 		document.getElementById('warning').style.display = 'block';
 	else {
 		document.getElementById('warning').style.display = 'none';
-		eel.data(name, url, login, password, info);
+		eel.getData(name, url, login, password, info);
 	}
 }

@@ -135,6 +135,10 @@ idea/
 .idea/shelf/
 .idea/workspace.xml
 
+# DataBase
+*.sqlite
+db.*
+
 # ---- Library ----
 # Bootstrap
 bootstrap/

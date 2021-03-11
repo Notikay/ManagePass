@@ -1,18 +1,18 @@
-# TODO: Заменить текстовый файл на БД
-# TODO: Переименовать функцию принятия данных
+# TODO: Добавить запись логов
+# TODO: Создать config-файл
+# TODO: Изменить на один аргумент-кортеж в getData()
 
 import eel
-
+from connect import createTable, insertData
 
 def main():
 
     @eel.expose
-    def data(name, url, login, password, info):
+    def getData(name, url, login, password, info):
+        insertData("db.sqlite", name, url, login, password, info)
+
         data_str = f"Имя: {name}; Ссылка: {url}; Логин: {login}; " \
                    f"Пароль: {password}; Доп. информация: {info}.\n"
-
-        with open("db.txt", "a") as file:
-            file.write(data_str)
         print(data_str)
 
     eel.init('web')
@@ -23,4 +23,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main() if createTable("db.sqlite") else exit()
