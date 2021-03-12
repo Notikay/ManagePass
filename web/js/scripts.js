@@ -1,19 +1,22 @@
 /*
-    TODO: Оптимизировать функцию
-    TODO: Отправлять данные кортежом
+	TODO: Добавить функции проверки на корректность данных
 */
 
 function sendData() {
-	var name = document.getElementById('name').value;
-	var url = document.getElementById('url').value;
-	var login = document.getElementById('login').value;
-	var password = document.getElementById('password').value;
-	var info = document.getElementById('info').value;
+	var data = {};
+	var warning = document.getElementById('warning');
+	var form_data = new FormData(document.getElementById("save-form"));
 
-	if ((name && url && login && password) == "")
-		document.getElementById('warning').style.display = 'block';
-	else {
-		document.getElementById('warning').style.display = 'none';
-		eel.getData(name, url, login, password, info);
-	}
-}
+	for (let [key, value] of form_data.entries()) {
+		if (value == "" && key != 'info') {
+			warning.style.display = 'block';
+			break;
+		};
+		data[key] = value;
+	};
+	
+	if (Object.keys(data).length == 5) {
+		warning.style.display = 'none';
+		eel.getData(data);
+	};
+};

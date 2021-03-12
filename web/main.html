@@ -24,21 +24,21 @@
     <main>
         <div class="main">
             <div class="container text-center">
-                <form>
+                <form id="save-form">
                     <div class="name">
-                        <input type="text" id="name" class="form-control" placeholder="Название сайта" required>
+                        <input type="text" name="name" class="form-control" placeholder="Название сайта" required>
                     </div>
                     <div class="url">
-                        <input type="url" id="url" class="form-control" placeholder="URL сайта" required>
+                        <input type="url" name="url" class="form-control" placeholder="URL сайта" required>
                     </div>
                     <div class="login">
-                        <input type="text" id="login" class="form-control" placeholder="Логин/Почта/Номер" required>
+                        <input type="text" name="login" class="form-control" placeholder="Логин/Почта/Номер" required>
                     </div>
                     <div class="password">
-                        <input type="password" id="password" class="form-control" placeholder="Пароль" required>
+                        <input type="password" name="password" class="form-control" placeholder="Пароль" required>
                     </div>
                     <div class="info">
-                        <textarea id="info" class="form-control" placeholder="Доп. информация"></textarea>
+                        <textarea name="info" class="form-control" placeholder="Доп. информация"></textarea>
                     </div>
                     <div class="save">
                         <button type="button" id="save" class="btn btn-success" onclick="sendData()">Сохранить данные!</button>

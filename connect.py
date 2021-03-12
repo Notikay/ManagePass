@@ -1,5 +1,4 @@
 # TODO: Добавить запись логов
-# TODO: Изменить на один аргумент-кортеж в insertData()
 
 import sqlite3
 from sqlite3 import Error
@@ -15,16 +14,18 @@ def createConnection(path):
 
     return connection
 
-def executeQuery(connection, query):
+
+def executeQuery(connection, query, value=()):
     cursor = connection.cursor()
     try:
-        cursor.execute(query)
+        cursor.execute(query, value)
         connection.commit()
         print("Запрос успешно выполнен!")
         return True
     except Error as e:
         print(f"Произошла ошибка '{e}'")
         return False
+
 
 def createTable(path):
     connection = createConnection(path)
@@ -40,12 +41,22 @@ def createTable(path):
     """
     return executeQuery(connection, table)
 
-def insertData(path, name, url, login, password, info):
+
+def insertData(path, data):
     connection = createConnection(path)
+
+    if data['info'] == "": data['info'] = None
+
     account = f"""
         INSERT INTO
             account_data (name, url, login, password, info)
         VALUES
-            ('{name}', '{url}', '{login}', '{password}', '{info}');
+            (?, ?, ?, ?, ?);
     """
-    executeQuery(connection, account)
+    values = (
+        data['name'], data['url'],
+        data['login'], data['password'],
+        data['info']
+    )
+
+    executeQuery(connection, account, values)
