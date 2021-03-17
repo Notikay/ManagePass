@@ -1,19 +1,26 @@
 # TODO: Добавить запись логов
 
 import sqlite3
+
 from sqlite3 import Error
+from configparser import ConfigParser
 
 
-def createConnection(path):
+config = ConfigParser()
+config.read("config.ini")
+
+
+def createConnection():
     connection = None
+    db_file = config.get("DataBase", "filename")
+
     try:
-        connection = sqlite3.connect(path)
-        print("Подключение к SQLite БД прошло успешно!")
+        connection = sqlite3.connect(db_file)
+        print("Подключение к БД SQLite прошло успешно!")
     except Error as e:
         print(f"Произошла ошибка '{e}'")
 
     return connection
-
 
 def executeQuery(connection, query, value=()):
     cursor = connection.cursor()
@@ -21,38 +28,20 @@ def executeQuery(connection, query, value=()):
         cursor.execute(query, value)
         connection.commit()
         print("Запрос успешно выполнен!")
-        return True
     except Error as e:
         print(f"Произошла ошибка '{e}'")
-        return False
 
-
-def createTable(path):
-    connection = createConnection(path)
-    table = """
-        CREATE TABLE IF NOT EXISTS account_data (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            url TEXT NOT NULL,
-            login TEXT NOT NULL,
-            password TEXT NOT NULL,
-            info TEXT
-        );
-    """
+def createTable():
+    connection = createConnection()
+    table = config.get("DataBase", "table")
     return executeQuery(connection, table)
 
-
-def insertData(path, data):
-    connection = createConnection(path)
+def insertData(data):
+    connection = createConnection()
 
     if data['info'] == "": data['info'] = None
 
-    account = f"""
-        INSERT INTO
-            account_data (name, url, login, password, info)
-        VALUES
-            (?, ?, ?, ?, ?);
-    """
+    account = config.get("DataBase", "account")
     values = (
         data['name'], data['url'],
         data['login'], data['password'],
